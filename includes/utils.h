@@ -1,18 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minitalk.h                                         :+:      :+:    :+:   */
+/*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aglanuss <aglanuss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/18 15:08:18 by aglanuss          #+#    #+#             */
-/*   Updated: 2024/02/20 01:41:44 by aglanuss         ###   ########.fr       */
+/*   Created: 2024/02/20 01:28:20 by aglanuss          #+#    #+#             */
+/*   Updated: 2024/02/20 01:31:00 by aglanuss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINITALK_H
-# define MINITALK_H
-# include "signal.h"
-# include "utils.h"
+#ifndef UTILS_H
+# define UTILS_H
+# include "unistd.h"
+
+void	ft_putchar(int c);
+void	ft_putstr(char *str);
 
 #endif

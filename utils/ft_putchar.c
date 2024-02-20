@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minitalk.h                                         :+:      :+:    :+:   */
+/*   ft_putchar.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aglanuss <aglanuss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/18 15:08:18 by aglanuss          #+#    #+#             */
-/*   Updated: 2024/02/20 01:41:44 by aglanuss         ###   ########.fr       */
+/*   Created: 2024/02/20 01:35:48 by aglanuss          #+#    #+#             */
+/*   Updated: 2024/02/20 01:45:07 by aglanuss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINITALK_H
-# define MINITALK_H
-# include "signal.h"
-# include "utils.h"
+#include "../includes/utils.h"
 
-#endif
+void	ft_putchar(int c)
+{
+	write(1, &c, 1);
+}
