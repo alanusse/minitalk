@@ -6,7 +6,7 @@
 #    By: aglanuss <aglanuss@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/18 14:34:32 by aglanuss          #+#    #+#              #
-#    Updated: 2024/02/19 13:56:32 by aglanuss         ###   ########.fr        #
+#    Updated: 2024/02/20 01:18:25 by aglanuss         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,6 +33,10 @@ client: $(CLIENT) $(INCLUDES) Makefile
 $(NAME): $(SERVER) $(CLIENT) $(INCLUDES) Makefile server client
 
 clean:
-	$(RM) $(SERVER) $(CLIENT)
+	$(RM) client server
 
 fclean: clean
+
+re: fclean all
+
+.PHONY: all clean fclean re
