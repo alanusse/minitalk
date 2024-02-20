@@ -6,7 +6,7 @@
 #    By: aglanuss <aglanuss@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/18 14:34:32 by aglanuss          #+#    #+#              #
-#    Updated: 2024/02/20 01:44:34 by aglanuss         ###   ########.fr        #
+#    Updated: 2024/02/20 12:28:20 by aglanuss         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,22 +17,25 @@ CCFLAGS = -Wall -Wextra -Werror
 
 RM = rm -rf
 
-INCLUDES = ./includes/minitalk.h ./includes/utils.h
+INCLUDES = ./includes/minitalk.h
 
 SERVER = ./src/server.c
 CLIENT = ./src/client.c
 
-UTILS = ./utils/ft_putchar.c ./utils/ft_putstr.c
+FT_PRINTF = ./lib/ft_printf/libftprintf.a
 
 all: $(NAME)
 
-server: $(SERVER) $(UTILS) $(INCLUDES) Makefile
-	$(CC) $(CCFLAGS) $(UTILS) $(SERVER) -o server
+server: $(SERVER) $(FT_PRINTF) $(INCLUDES) Makefile
+	$(CC) $(CCFLAGS) $(FT_PRINTF) $(SERVER) -o server
 
-client: $(CLIENT) $(UTILS) $(INCLUDES) Makefile
-	$(CC) $(CCFLAGS) $(UTILS) $(CLIENT) -o client
+client: $(CLIENT) $(FT_PRINTF) $(INCLUDES) Makefile
+	$(CC) $(CCFLAGS) $(FT_PRINTF) $(CLIENT) -o client
 
-$(NAME): $(SERVER) $(UTILS) $(CLIENT) $(INCLUDES) Makefile server client
+$(FT_PRINTF):
+	$(MAKE) -C ./lib/ft_printf
+
+$(NAME): $(SERVER) $(FT_PRINTF) $(CLIENT) $(INCLUDES) Makefile server client
 
 clean:
 	$(RM) client server
