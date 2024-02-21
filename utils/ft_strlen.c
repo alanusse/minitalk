@@ -6,13 +6,13 @@
 /*   By: aglanuss <aglanuss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 23:12:51 by aglanuss          #+#    #+#             */
-/*   Updated: 2024/02/20 23:23:31 by aglanuss         ###   ########.fr       */
+/*   Updated: 2024/02/21 13:50:04 by aglanuss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/utils.h"
 
-int ft_strlen(char *str)
+int	ft_strlen(char *str)
 {
 	int	len;
 
