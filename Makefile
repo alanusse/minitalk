@@ -6,7 +6,7 @@
 #    By: aglanuss <aglanuss@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/18 14:34:32 by aglanuss          #+#    #+#              #
-#    Updated: 2024/02/20 23:36:08 by aglanuss         ###   ########.fr        #
+#    Updated: 2024/02/21 13:51:46 by aglanuss         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ CLIENT = ./src/client.c
 
 FT_PRINTF = ./lib/ft_printf/libftprintf.a
 
-UTILS = ./utils/ft_isdigit.c ./utils/ft_strlen.c
+UTILS = ./utils/ft_isdigit.c ./utils/ft_strlen.c ./utils/ft_atoi.c
 
 all: $(NAME)
 
