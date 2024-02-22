@@ -6,7 +6,7 @@
 /*   By: aglanuss <aglanuss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 01:42:01 by aglanuss          #+#    #+#             */
-/*   Updated: 2024/02/22 02:01:47 by aglanuss         ###   ########.fr       */
+/*   Updated: 2024/02/22 12:30:11 by aglanuss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static void	check_arguments(int argc, char **argv)
 	i = 0;
 	while (argv[1][i])
 	{
-		if (!ft_isdigit(*argv[1]))
+		if (!ft_isdigit(argv[1][i]))
 		{
 			ft_printf("Error: invalid PID\n");
 			exit(EXIT_FAILURE);
@@ -76,15 +76,15 @@ static void	send_str_len(pid_t pid, char *str)
 	}
 }
 
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
 	pid_t	pid;
 	char	*text;
 
+	check_arguments(argc, argv);
 	pid = ft_atoi(argv[1]);
 	text = argv[2];
-	check_arguments(argc, argv);
 	send_str_len(pid, text);
 	send_signals(pid, text);
-	return 0;
+	return (0);
 }
