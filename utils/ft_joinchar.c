@@ -1,24 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.h                                            :+:      :+:    :+:   */
+/*   ft_joinchar.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aglanuss <aglanuss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/20 23:13:20 by aglanuss          #+#    #+#             */
-/*   Updated: 2024/03/08 12:13:40 by aglanuss         ###   ########.fr       */
+/*   Created: 2024/03/08 12:12:54 by aglanuss          #+#    #+#             */
+/*   Updated: 2024/03/08 12:15:52 by aglanuss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef UTILS_H
-# define UTILS_H
-# include <stdlib.h>
-# include <errno.h>
+#include "../includes/utils.h"
 
-int		ft_strlen(char *str);
-int		ft_isdigit(char c);
-int		ft_atoi(const char *str);
-char	*ft_itoa(int n);
-char	*ft_joinchar(char *str, char c);
+char	*ft_joinchar(char *str, char c)
+{
+	char		*ptr;
+	size_t		i;
 
-#endif
+	ptr = (char *)malloc((ft_strlen(str) + 2) * sizeof(char));
+	if (!ptr)
+		exit(EXIT_FAILURE);
+	i = 0;
+	while (str && str[i])
+	{
+		ptr[i] = str[i];
+		i++;
+	}
+	ptr[i] = c;
+	ptr[++i] = '\0';
+	free(str);
+	return (ptr);
+}
