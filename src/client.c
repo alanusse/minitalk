@@ -6,7 +6,7 @@
 /*   By: aglanuss <aglanuss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 01:42:01 by aglanuss          #+#    #+#             */
-/*   Updated: 2024/03/08 12:18:34 by aglanuss         ###   ########.fr       */
+/*   Updated: 2024/03/08 13:01:01 by aglanuss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ int	main(int argc, char **argv)
 	check_arguments(argc, argv);
 	pid = ft_atoi(argv[1]);
 	text = argv[2];
-	sleep_time = 300;
+	sleep_time = 200;
 	send_str_len(pid, text, sleep_time);
 	send_signals(pid, text, sleep_time);
 	return (0);

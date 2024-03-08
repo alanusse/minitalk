@@ -6,7 +6,7 @@
 /*   By: aglanuss <aglanuss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 22:37:41 by aglanuss          #+#    #+#             */
-/*   Updated: 2024/03/08 12:18:10 by aglanuss         ###   ########.fr       */
+/*   Updated: 2024/03/08 12:58:14 by aglanuss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ static void	char_handler(unsigned int *step, char c)
 		if (!str)
 			exit(EXIT_FAILURE);
 		str[ft_atoi(str_len)] = '\0';
+		free_str(&str_len);
 		*step += 1;
 	}
 	else if (*step == 2)
@@ -63,7 +64,6 @@ static void	char_handler(unsigned int *step, char c)
 		fill_str(&str, '\0');
 		ft_printf("%s", str);
 		free_str(&str);
-		free_str(&str_len);
 		*step = 0;
 	}
 }
