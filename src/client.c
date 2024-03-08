@@ -6,7 +6,7 @@
 /*   By: aglanuss <aglanuss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 01:42:01 by aglanuss          #+#    #+#             */
-/*   Updated: 2024/02/22 12:30:11 by aglanuss         ###   ########.fr       */
+/*   Updated: 2024/03/08 12:18:34 by aglanuss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,19 @@ static void	check_arguments(int argc, char **argv)
 	}
 }
 
-static void	send_signals(pid_t pid, char *str)
+static void	send_null_terminator(pid_t pid, int sleep_time)
+{
+	int	i;
+
+	i = -1;
+	while (++i < 8)
+	{
+		kill(pid, SIGUSR1);
+		usleep(sleep_time);
+	}
+}
+
+static void	send_signals(pid_t pid, char *str, int sleep_time)
 {
 	int	tmp;
 	int	i;
@@ -53,38 +65,33 @@ static void	send_signals(pid_t pid, char *str)
 				kill(pid, SIGUSR2);
 			else
 				kill(pid, SIGUSR1);
-			usleep(11);
+			usleep(sleep_time);
 			i--;
 		}
 		str++;
 	}
+	send_null_terminator(pid, sleep_time);
 }
 
-static void	send_str_len(pid_t pid, char *str)
+static void	send_str_len(pid_t pid, char *str, int sleep_time)
 {
 	int	len;
-	int	i;
 
 	len = ft_strlen(str);
-	send_signals(pid, ft_itoa(len));
-	i = 0;
-	while (i < 8)
-	{
-		kill(pid, SIGUSR1);
-		usleep(11);
-		i++;
-	}
+	send_signals(pid, ft_itoa(len), sleep_time);
 }
 
 int	main(int argc, char **argv)
 {
 	pid_t	pid;
 	char	*text;
+	int		sleep_time;
 
 	check_arguments(argc, argv);
 	pid = ft_atoi(argv[1]);
 	text = argv[2];
-	send_str_len(pid, text);
-	send_signals(pid, text);
+	sleep_time = 300;
+	send_str_len(pid, text, sleep_time);
+	send_signals(pid, text, sleep_time);
 	return (0);
 }
