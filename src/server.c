@@ -6,7 +6,7 @@
 /*   By: aglanuss <aglanuss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 22:37:41 by aglanuss          #+#    #+#             */
-/*   Updated: 2024/03/08 12:58:14 by aglanuss         ###   ########.fr       */
+/*   Updated: 2024/03/09 18:48:32 by aglanuss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,11 @@ static void	fill_str(char **str, char c)
  * step 2: fill reserved memory with chars received.
  * step 3: print string, free string and str_len and set step to 0.
 */
-static void	char_handler(unsigned int *step, char c)
+static void	char_handler(unsigned int *step, char c, siginfo_t *info)
 {
 	static char	*str_len = NULL;
 	static char	*str = NULL;
 
-	if (c == 0)
-		*step += 1;
 	if (*step == 0)
 		str_len = ft_joinchar(str_len, c);
 	if (*step == 1)
@@ -65,23 +63,27 @@ static void	char_handler(unsigned int *step, char c)
 		ft_printf("%s", str);
 		free_str(&str);
 		*step = 0;
+		kill(info->si_pid, SIGUSR2);
 	}
 }
 
-static void	signal_handler(int signal)
+static void	signal_handler(int sig, siginfo_t *info, void *context)
 {
 	static unsigned char	buffer = 0;
 	static unsigned int		bits_count = 0;
 	static unsigned int		step = 0;
 
-	if (signal == SIGUSR1)
+	(void)context;
+	if (sig == SIGUSR1)
 		buffer = (buffer << 1) | 0;
-	else if (signal == SIGUSR2)
+	else if (sig == SIGUSR2)
 		buffer = (buffer << 1) | 1;
 	bits_count++;
 	if (bits_count == 8)
 	{
-		char_handler(&step, buffer);
+		if (buffer == 0)
+			step++;
+		char_handler(&step, buffer, info);
 		bits_count = 0;
 		buffer = 0;
 	}
@@ -89,9 +91,15 @@ static void	signal_handler(int signal)
 
 int	main(void)
 {
-	signal(SIGUSR1, signal_handler);
-	signal(SIGUSR2, signal_handler);
-	ft_printf("Started server with PID %i\n", getpid());
+	struct sigaction	sa;
+
+	sa.sa_flags = SA_SIGINFO;
+	sa.sa_sigaction = signal_handler;
+	sigaction(SIGUSR1, &sa, NULL);
+	sigaction(SIGUSR2, &sa, NULL);
+	ft_printf("\e[1;34mMinitalk\e[0m\n");
+	ft_printf("\e[1;37mStarted server with \e[1;32mPID %i\e[0m\n", getpid());
+	ft_printf("\e[0;33mWaiting for signals...\e[0m\n\n");
 	while (1)
 		sleep(1);
 }

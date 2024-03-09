@@ -6,7 +6,7 @@
 /*   By: aglanuss <aglanuss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 01:42:01 by aglanuss          #+#    #+#             */
-/*   Updated: 2024/03/08 13:01:01 by aglanuss         ###   ########.fr       */
+/*   Updated: 2024/03/09 18:53:27 by aglanuss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,12 +73,10 @@ static void	send_signals(pid_t pid, char *str, int sleep_time)
 	send_null_terminator(pid, sleep_time);
 }
 
-static void	send_str_len(pid_t pid, char *str, int sleep_time)
+static void	signal_handler(int pid)
 {
-	int	len;
-
-	len = ft_strlen(str);
-	send_signals(pid, ft_itoa(len), sleep_time);
+	(void)pid;
+	ft_printf("\e[0;32mString sent successfully!\n");
 }
 
 int	main(int argc, char **argv)
@@ -86,12 +84,15 @@ int	main(int argc, char **argv)
 	pid_t	pid;
 	char	*text;
 	int		sleep_time;
+	int		str_len;
 
 	check_arguments(argc, argv);
 	pid = ft_atoi(argv[1]);
 	text = argv[2];
 	sleep_time = 200;
-	send_str_len(pid, text, sleep_time);
+	str_len = ft_strlen(text);
+	signal(SIGUSR2, signal_handler);
+	send_signals(pid, ft_itoa(str_len), sleep_time);
 	send_signals(pid, text, sleep_time);
 	return (0);
 }
