@@ -6,7 +6,7 @@
 #    By: aglanuss <aglanuss@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/18 14:34:32 by aglanuss          #+#    #+#              #
-#    Updated: 2024/03/08 12:14:40 by aglanuss         ###   ########.fr        #
+#    Updated: 2024/03/26 11:44:32 by aglanuss         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ CCFLAGS = -Wall -Wextra -Werror
 
 RM = rm -rf
 
-INCLUDES = ./includes/minitalk.h
+INCLUDES = ./includes/minitalk.h ./includes/utils.h
 
 SERVER = ./src/server.c
 CLIENT = ./src/client.c
