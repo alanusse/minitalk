@@ -6,7 +6,7 @@
 /*   By: aglanuss <aglanuss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 01:42:01 by aglanuss          #+#    #+#             */
-/*   Updated: 2024/03/09 18:53:27 by aglanuss         ###   ########.fr       */
+/*   Updated: 2024/04/03 13:14:55 by aglanuss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,15 +84,16 @@ int	main(int argc, char **argv)
 	pid_t	pid;
 	char	*text;
 	int		sleep_time;
-	int		str_len;
+	char	*str_len;
 
 	check_arguments(argc, argv);
 	pid = ft_atoi(argv[1]);
 	text = argv[2];
-	sleep_time = 200;
-	str_len = ft_strlen(text);
+	sleep_time = 90;
+	str_len = ft_itoa(ft_strlen(text));
 	signal(SIGUSR2, signal_handler);
-	send_signals(pid, ft_itoa(str_len), sleep_time);
+	send_signals(pid, str_len, sleep_time);
 	send_signals(pid, text, sleep_time);
+	free(str_len);
 	return (0);
 }
